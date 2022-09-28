@@ -61,15 +61,11 @@ public class UserDatabase {
         }
     }
 
-    public User findAlikeByName(String nameLike) {
-        final String query = "SELECT * FROM %s WHERE name LIKE ?;";
+    public List<User> findAlikeByName(String nameLike) {
+        final String query = "SELECT * FROM %s WHERE LOWER(name) LIKE LOWER(?);";
         final String sql = addTableToQuery(table, query);
-        try {
-            final User user = jdbcTemplate.queryForObject(sql, new UserRowMapper(), nameLike.concat("%"));
-            return user;
-        } catch (DataAccessException e) {
-            return null;
-        }
+        final List<User> userlist = jdbcTemplate.query(sql, new UserRowMapper(), nameLike.concat("%"));
+        return userlist;
     }
 
     public boolean updateById(User user) {
