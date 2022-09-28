@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,4 +23,8 @@ public class ApiController {
         return apiService.getUser(id);
     }
 
+    @GetMapping("/users/alike/{namelike}")
+    public List<Map<Descriptors.FieldDescriptor, Object>> getAlikeUsers(@PathVariable String namelike) throws InterruptedException {
+        return apiService.getAlikeUsers(namelike);
+    }
 }
