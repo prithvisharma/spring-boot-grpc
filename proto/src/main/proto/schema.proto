@@ -1,0 +1,20 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.demo;
+
+message User {
+  string id = 1;
+  string name = 2;
+  int32 age = 3;
+  string gender = 4;
+  int32 phone = 5;
+  string email = 6;
+  string address = 7;
+  string city = 8;
+  string state = 9;
+  int32 pincode = 10;
+}
+
+service UserService {
+  rpc getUser(User) returns(User){}
+}
