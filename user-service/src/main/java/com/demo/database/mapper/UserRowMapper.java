@@ -14,7 +14,7 @@ public class UserRowMapper implements RowMapper<User> {
                 .setName(rs.getString("name"))
                 .setAge(rs.getInt("age"))
                 .setGender(rs.getString("gender"))
-                .setPhone(rs.getDouble("phone"))
+                .setPhone(rs.getLong("phone"))
                 .setEmail(rs.getString("email"))
                 .setAddress(rs.getString("address"))
                 .setCity(rs.getString("city"))
