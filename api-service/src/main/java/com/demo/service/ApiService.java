@@ -1,5 +1,7 @@
 package com.demo.service;
 
+import com.demo.DeleteRequest;
+import com.demo.DeleteResponse;
 import com.demo.User;
 import com.demo.UserServiceGrpc;
 import com.demo.dto.request.DeleteUsersRequestDto;
@@ -62,7 +64,7 @@ public class ApiService {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         final List<Map<Descriptors.FieldDescriptor, Object>> response = new ArrayList<>();
 
-        StreamObserver<User> responseObserver = userGrpcStreamingClient.saveUsers(new StreamObserver<User>() {
+        final StreamObserver<User> responseObserver = userGrpcStreamingClient.saveUsers(new StreamObserver<User>() {
             @Override
             public void onNext(User user) {
                 response.add(user.getAllFields());
@@ -89,7 +91,7 @@ public class ApiService {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         final List<Map<Descriptors.FieldDescriptor, Object>> response = new ArrayList<>();
 
-        StreamObserver<User> responseObserver = userGrpcStreamingClient.updateUsers(new StreamObserver<User>() {
+        final StreamObserver<User> responseObserver = userGrpcStreamingClient.updateUsers(new StreamObserver<User>() {
             @Override
             public void onNext(User user) {
                 response.add(user.getAllFields());
@@ -112,7 +114,30 @@ public class ApiService {
         return await ? response : Collections.emptyList();
     }
 
-    public String deleteUsers(List<DeleteUsersRequestDto> userList) {
-    return null;
+    public List<Map<Descriptors.FieldDescriptor, Object>> deleteUsers(List<DeleteUsersRequestDto> userList) throws InterruptedException {
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        final List<Map<Descriptors.FieldDescriptor, Object>> response = new ArrayList<>();
+
+        final StreamObserver<DeleteRequest> responseObserver = userGrpcStreamingClient.deleteUsers(new StreamObserver<DeleteResponse>() {
+            @Override
+            public void onNext(DeleteResponse deleteResponse) {
+                response.add(deleteResponse.getAllFields());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onCompleted() {
+                countDownLatch.countDown();
+            }
+        });
+
+        userList.forEach( (userDto) -> responseObserver.onNext(userDto.generateDeleteRequest()));
+        responseObserver.onCompleted();
+        boolean await = countDownLatch.await(1, TimeUnit.MINUTES);
+        return await ? response : Collections.emptyList();
     }
 }
