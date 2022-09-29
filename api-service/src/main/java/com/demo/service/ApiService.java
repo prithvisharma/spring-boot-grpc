@@ -79,21 +79,37 @@ public class ApiService {
             }
         });
 
-        userList.forEach( (userDto) -> {
-        responseObserver.onNext(User.newBuilder()
-                .setName(userDto.getName()).setAge(userDto.getAge())
-                .setGender(userDto.getGender()).setPhone(userDto.getPhone()).setEmail(userDto.getEmail())
-                .setAddress(userDto.getAddress()).setCity(userDto.getCity()).setState(userDto.getState())
-                .setPincode(userDto.getPincode()).build()
-        );
-        });
+        userList.forEach( (userDto) -> responseObserver.onNext(userDto.generateUser()));
         responseObserver.onCompleted();
         boolean await = countDownLatch.await(1, TimeUnit.MINUTES);
         return await ? response : Collections.emptyList();
     }
 
-    public String updateUsers(List<UpdateUsersRequestDto> userList) {
-        return null;
+    public List<Map<Descriptors.FieldDescriptor, Object>> updateUsers(List<UpdateUsersRequestDto> userList) throws InterruptedException {
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        final List<Map<Descriptors.FieldDescriptor, Object>> response = new ArrayList<>();
+
+        StreamObserver<User> responseObserver = userGrpcStreamingClient.updateUsers(new StreamObserver<User>() {
+            @Override
+            public void onNext(User user) {
+                response.add(user.getAllFields());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onCompleted() {
+                countDownLatch.countDown();
+            }
+        });
+
+        userList.forEach( (userDto) -> responseObserver.onNext(userDto.generateUser()));
+        responseObserver.onCompleted();
+        boolean await = countDownLatch.await(1, TimeUnit.MINUTES);
+        return await ? response : Collections.emptyList();
     }
 
     public String deleteUsers(List<DeleteUsersRequestDto> userList) {
