@@ -67,13 +67,10 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
 
             @Override
             public void onNext(User newUser) {
-                System.out.println(newUser.getAllFields());
                 final User dbUser = userDatabase.findById(newUser.getId());
-                System.out.println(dbUser.getAllFields());
                 final User finalUser = userServiceHandler.handleUpdateUser(newUser, dbUser);
-                System.out.println(finalUser.getAllFields());
-//                final boolean isUpdated = userDatabase.updateById(finalUser);
-                if(true){
+                final boolean isUpdated = userDatabase.updateById(finalUser);
+                if(isUpdated){
                     responseObserver.onNext(finalUser);
                 }
                 else {
