@@ -1,0 +1,422 @@
+{
+	"info": {
+		"_postman_id": "ad9bbb4d-1f86-47dc-8eb4-ad03704ff663",
+		"name": "Spring Boot Grpc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12564675"
+	},
+	"item": [
+		{
+			"name": "get user by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}user/:id",
+					"host": [
+						"{{local}}user"
+					],
+					"path": [
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "ef2b9850-0670-4ea4-a345-93fbb3c5a929"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get user by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}user/:id",
+							"host": [
+								"{{local}}user"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "ef2b9850-0670-4ea4-a345-93fbb3c5a929"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Sep 2022 19:05:48 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"com.demo.User.id\": \"ef2b9850-0670-4ea4-a345-93fbb3c5a929\",\n    \"com.demo.User.name\": \"Prithvi Sharma\",\n    \"com.demo.User.age\": 23,\n    \"com.demo.User.gender\": \"MALE\",\n    \"com.demo.User.phone\": 9096410286,\n    \"com.demo.User.email\": \"prithvi2255@gmail.com\",\n    \"com.demo.User.address\": \"Nalanda, Naigaon East\",\n    \"com.demo.User.city\": \"Mumbai\",\n    \"com.demo.User.state\": \"Maharashtra\",\n    \"com.demo.User.pincode\": 401208\n}"
+				}
+			]
+		},
+		{
+			"name": "get alike users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}users/alike/:namelike",
+					"host": [
+						"{{local}}users"
+					],
+					"path": [
+						"alike",
+						":namelike"
+					],
+					"variable": [
+						{
+							"key": "namelike",
+							"value": "Pri"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get alike users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}users/alike/:namelike",
+							"host": [
+								"{{local}}users"
+							],
+							"path": [
+								"alike",
+								":namelike"
+							],
+							"variable": [
+								{
+									"key": "namelike",
+									"value": "Pri"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Sep 2022 21:06:29 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"com.demo.User.id\": \"ef2b9850-0670-4ea4-a345-93fbb3c5a929\",\n        \"com.demo.User.name\": \"Prithvi Sharma\",\n        \"com.demo.User.age\": 23,\n        \"com.demo.User.gender\": \"MALE\",\n        \"com.demo.User.phone\": 9096410286,\n        \"com.demo.User.email\": \"prithvi2255@gmail.com\",\n        \"com.demo.User.address\": \"Nalanda, Naigaon East\",\n        \"com.demo.User.city\": \"Mumbai\",\n        \"com.demo.User.state\": \"Maharashtra\",\n        \"com.demo.User.pincode\": 401208\n    },\n    {\n        \"com.demo.User.id\": \"b1db5453-dfa4-4162-a6c7-98c05e7e4b31\",\n        \"com.demo.User.name\": \"Prithvi Rampage\",\n        \"com.demo.User.age\": 12,\n        \"com.demo.User.gender\": \"MALE\",\n        \"com.demo.User.phone\": 9876543210,\n        \"com.demo.User.email\": \"prithvi@gmail.com\",\n        \"com.demo.User.address\": \"Nowhere, Somewhere\",\n        \"com.demo.User.city\": \"Mumbai\",\n        \"com.demo.User.state\": \"Maharashtra\",\n        \"com.demo.User.pincode\": 400000\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "save users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"Son Goku\",\r\n        \"age\": 36,\r\n        \"gender\": \"MALE\",\r\n        \"phone\": 1234567890,\r\n        \"email\": \"goku@gmail.com\",\r\n        \"address\": \"Earth, Universe 7\",\r\n        \"city\": \"Mumbai\",\r\n        \"state\": \"Maharashtra\",\r\n        \"pincode\": 401208\r\n    },\r\n    {\r\n        \"name\": \"ChiChi\",\r\n        \"age\": 37,\r\n        \"gender\": \"FEMALE\",\r\n        \"phone\": 3333333330,\r\n        \"email\": \"chichi@gmail.com\",\r\n        \"address\": \"Earth, Universe 7\",\r\n        \"city\": \"Mumbai\",\r\n        \"state\": \"Maharashtra\",\r\n        \"pincode\": 401208\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}users/",
+					"host": [
+						"{{local}}users"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "save users",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"name\": \"Son Goku\",\r\n        \"age\": 36,\r\n        \"gender\": \"MALE\",\r\n        \"phone\": 1234567890,\r\n        \"email\": \"goku@gmail.com\",\r\n        \"address\": \"Earth, Universe 7\",\r\n        \"city\": \"Mumbai\",\r\n        \"state\": \"Maharashtra\",\r\n        \"pincode\": 401208\r\n    },\r\n    {\r\n        \"name\": \"ChiChi\",\r\n        \"age\": 37,\r\n        \"gender\": \"FEMALE\",\r\n        \"phone\": 3333333330,\r\n        \"email\": \"chichi@gmail.com\",\r\n        \"address\": \"Earth, Universe 7\",\r\n        \"city\": \"Mumbai\",\r\n        \"state\": \"Maharashtra\",\r\n        \"pincode\": 401208\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}users/",
+							"host": [
+								"{{local}}users"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 Sep 2022 05:43:23 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"com.demo.User.id\": \"34709b86-3eac-423f-945a-b26fcaf77cc6\",\n        \"com.demo.User.name\": \"Son Goku\",\n        \"com.demo.User.age\": 36,\n        \"com.demo.User.gender\": \"MALE\",\n        \"com.demo.User.phone\": 1234567890,\n        \"com.demo.User.email\": \"goku@gmail.com\",\n        \"com.demo.User.address\": \"Earth, Universe 7\",\n        \"com.demo.User.city\": \"Mumbai\",\n        \"com.demo.User.state\": \"Maharashtra\",\n        \"com.demo.User.pincode\": 401208\n    },\n    {\n        \"com.demo.User.id\": \"3758aa51-11ef-4749-9ea4-9097f82dc0e9\",\n        \"com.demo.User.name\": \"ChiChi\",\n        \"com.demo.User.age\": 37,\n        \"com.demo.User.gender\": \"FEMALE\",\n        \"com.demo.User.phone\": 3333333330,\n        \"com.demo.User.email\": \"chichi@gmail.com\",\n        \"com.demo.User.address\": \"Earth, Universe 7\",\n        \"com.demo.User.city\": \"Mumbai\",\n        \"com.demo.User.state\": \"Maharashtra\",\n        \"com.demo.User.pincode\": 401208\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "update users",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\":\"6a7b90cf-78a7-4ba3-a05d-3b5fdb1acc4a\",\r\n        \"field\":\"NAME\",\r\n        \"value\":\"Son Gohan\"\r\n    },\r\n    {\r\n        \"id\":\"b70337e0-cc29-4382-ac80-17ce1c7231b0\",\r\n        \"field\":\"address\",\r\n        \"value\":\"Planet 363, Universe 9\"\r\n    },\r\n    {\r\n        \"id\":\"6a7b90cf-78a7-4ba3-a05d-3b5fdb1acc4a\",\r\n        \"field\":\"AGE\",\r\n        \"value\":\"21\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}users/",
+					"host": [
+						"{{local}}users"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "update users",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\":\"350c2f91-2acb-492f-84e9-725de55d8326\",\r\n        \"field\":\"NAME\",\r\n        \"value\":\"Son Gohan\"\r\n    },\r\n    {\r\n        \"id\":\"47468d6c-93e1-4d33-8ddb-e9f5f3b7bb17\",\r\n        \"field\":\"address\",\r\n        \"value\":\"Planet 363, Universe 9\"\r\n    },\r\n    {\r\n        \"id\":\"350c2f91-2acb-492f-84e9-725de55d8326\",\r\n        \"field\":\"AGE\",\r\n        \"value\":\"21\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}users/",
+							"host": [
+								"{{local}}users"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 Sep 2022 06:39:59 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"com.demo.User.id\": \"350c2f91-2acb-492f-84e9-725de55d8326\",\n        \"com.demo.User.name\": \"Son Gohan\",\n        \"com.demo.User.age\": 36,\n        \"com.demo.User.gender\": \"MALE\",\n        \"com.demo.User.phone\": 1234567890,\n        \"com.demo.User.email\": \"goku@gmail.com\",\n        \"com.demo.User.address\": \"Earth, Universe 7\",\n        \"com.demo.User.city\": \"Mumbai\",\n        \"com.demo.User.state\": \"Maharashtra\",\n        \"com.demo.User.pincode\": 401208\n    },\n    {\n        \"com.demo.User.id\": \"47468d6c-93e1-4d33-8ddb-e9f5f3b7bb17\",\n        \"com.demo.User.name\": \"ChiChi\",\n        \"com.demo.User.age\": 37,\n        \"com.demo.User.gender\": \"FEMALE\",\n        \"com.demo.User.phone\": 3333333330,\n        \"com.demo.User.email\": \"chichi@gmail.com\",\n        \"com.demo.User.address\": \"Planet 363, Universe 9\",\n        \"com.demo.User.city\": \"Mumbai\",\n        \"com.demo.User.state\": \"Maharashtra\",\n        \"com.demo.User.pincode\": 401208\n    },\n    {\n        \"com.demo.User.id\": \"350c2f91-2acb-492f-84e9-725de55d8326\",\n        \"com.demo.User.name\": \"Son Gohan\",\n        \"com.demo.User.age\": 21,\n        \"com.demo.User.gender\": \"MALE\",\n        \"com.demo.User.phone\": 1234567890,\n        \"com.demo.User.email\": \"goku@gmail.com\",\n        \"com.demo.User.address\": \"Earth, Universe 7\",\n        \"com.demo.User.city\": \"Mumbai\",\n        \"com.demo.User.state\": \"Maharashtra\",\n        \"com.demo.User.pincode\": 401208\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "delete users",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\":\"b70337e0-cc29-4382-ac80-17ce1c7231b0\"\r\n    },\r\n    {\r\n        \"id\":\"6a7b90cf-78a7-4ba3-a05d-3b5fdb1acc4a\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}users/",
+					"host": [
+						"{{local}}users"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete users",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\":\"b70337e0-cc29-4382-ac80-17ce1c7231b0\"\r\n    },\r\n    {\r\n        \"id\":\"47468d6c-93e1-4d33-8ddb-e9f5f3b7bb17\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}users/",
+							"host": [
+								"{{local}}users"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 Sep 2022 07:21:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"com.demo.DeleteResponse.id\": \"b70337e0-cc29-4382-ac80-17ce1c7231b0\",\n        \"com.demo.DeleteResponse.deleted\": true\n    },\n    {\n        \"com.demo.DeleteResponse.id\": \"6a7b90cf-78a7-4ba3-a05d-3b5fdb1acc4a\",\n        \"com.demo.DeleteResponse.deleted\": true\n    }\n]"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "http://localhost:8081/api/",
+			"type": "string"
+		}
+	]
+}
