@@ -70,10 +70,9 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
                 final User dbUser = userDatabase.findById(newUser.getId());
                 final User finalUser = userServiceHandler.handleUpdateUser(newUser, dbUser);
                 final boolean isUpdated = userDatabase.updateById(finalUser);
-                if(isUpdated){
+                if (isUpdated) {
                     responseObserver.onNext(finalUser);
-                }
-                else {
+                } else {
                     responseObserver.onNext(dbUser);
                 }
             }

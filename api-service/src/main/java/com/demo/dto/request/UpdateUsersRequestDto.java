@@ -31,8 +31,8 @@ public class UpdateUsersRequestDto {
         this.value = value;
     }
 
-    public User generateUser(){
-        switch (this.getField().toUpperCase()){
+    public User generateUser() {
+        switch (this.getField().toUpperCase()) {
             case "NAME":
                 return User.newBuilder().setId(this.getId()).setName(this.value).build();
             case "AGE":

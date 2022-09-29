@@ -14,11 +14,11 @@ public class DeleteUsersRequestDto {
         this.id = id;
     }
 
-    public User generateUser(){
+    public User generateUser() {
         return User.newBuilder().setId(this.id).build();
     }
 
-    public DeleteRequest generateDeleteRequest(){
+    public DeleteRequest generateDeleteRequest() {
         return DeleteRequest.newBuilder().setId(this.getId()).build();
     }
 }

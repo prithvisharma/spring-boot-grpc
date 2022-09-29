@@ -12,10 +12,9 @@ import java.util.List;
 @Component
 public class UserDatabase {
 
+    private final String table = "public.user";
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    private final String table = "public.user";
 
     private String addTableToQuery(String table, String sql) {
         return String.format(sql, table);
@@ -43,7 +42,7 @@ public class UserDatabase {
         final String query = "SELECT * FROM %s WHERE id = uuid(?);";
         final String sql = addTableToQuery(table, query);
         try {
-            final User user= jdbcTemplate.queryForObject(sql, new UserRowMapper(), id);
+            final User user = jdbcTemplate.queryForObject(sql, new UserRowMapper(), id);
             return user;
         } catch (DataAccessException e) {
             return null;
@@ -54,7 +53,7 @@ public class UserDatabase {
         final String query = "SELECT * FROM %s WHERE name = ?;";
         final String sql = addTableToQuery(table, query);
         try {
-            final User user= jdbcTemplate.queryForObject(sql, new UserRowMapper(), name);
+            final User user = jdbcTemplate.queryForObject(sql, new UserRowMapper(), name);
             return user;
         } catch (DataAccessException e) {
             return null;
@@ -73,7 +72,7 @@ public class UserDatabase {
                 "email=?, address=?, city=?, state=?, pincode=? " +
                 "WHERE id=uuid(?);";
         final String sql = addTableToQuery(table, query);
-        final int result = jdbcTemplate.update(sql,user.getName(), user.getAge(), user.getGender(),
+        final int result = jdbcTemplate.update(sql, user.getName(), user.getAge(), user.getGender(),
                 user.getPhone(), user.getEmail(), user.getAddress(), user.getCity(), user.getState(),
                 user.getPincode(), user.getId());
         return result == 1;
@@ -82,7 +81,7 @@ public class UserDatabase {
     public boolean deleteById(String id) {
         final String query = "DELETE FROM %s WHERE id=uuid(?);";
         final String sql = addTableToQuery(table, query);
-        final int result = jdbcTemplate.update(sql,id);
+        final int result = jdbcTemplate.update(sql, id);
         return result == 1;
     }
 }

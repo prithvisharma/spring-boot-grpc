@@ -28,7 +28,7 @@ public class ApiService {
     @GrpcClient("grpc-client")
     private UserServiceGrpc.UserServiceStub userGrpcStreamingClient;
 
-    public Map<Descriptors.FieldDescriptor, Object> getUser(String id){
+    public Map<Descriptors.FieldDescriptor, Object> getUser(String id) {
         final User user = User.newBuilder().setId(id).build();
         final User grpcResponse = userGrpcClient.getUser(user);
         return grpcResponse.getAllFields();
@@ -81,7 +81,7 @@ public class ApiService {
             }
         });
 
-        userList.forEach( (userDto) -> responseObserver.onNext(userDto.generateUser()));
+        userList.forEach((userDto) -> responseObserver.onNext(userDto.generateUser()));
         responseObserver.onCompleted();
         boolean await = countDownLatch.await(1, TimeUnit.MINUTES);
         return await ? response : Collections.emptyList();
@@ -108,7 +108,7 @@ public class ApiService {
             }
         });
 
-        userList.forEach( (userDto) -> responseObserver.onNext(userDto.generateUser()));
+        userList.forEach((userDto) -> responseObserver.onNext(userDto.generateUser()));
         responseObserver.onCompleted();
         boolean await = countDownLatch.await(1, TimeUnit.MINUTES);
         return await ? response : Collections.emptyList();
@@ -135,7 +135,7 @@ public class ApiService {
             }
         });
 
-        userList.forEach( (userDto) -> responseObserver.onNext(userDto.generateDeleteRequest()));
+        userList.forEach((userDto) -> responseObserver.onNext(userDto.generateDeleteRequest()));
         responseObserver.onCompleted();
         boolean await = countDownLatch.await(1, TimeUnit.MINUTES);
         return await ? response : Collections.emptyList();

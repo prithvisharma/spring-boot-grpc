@@ -6,32 +6,32 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserServiceHandler {
 
-    public User handleUpdateUser(User newUser, User dbUser){
-        if(!newUser.getName().isEmpty()){
+    public User handleUpdateUser(User newUser, User dbUser) {
+        if (!newUser.getName().isEmpty()) {
             return User.newBuilder(dbUser).setName(newUser.getName()).build();
         }
-        if(!(newUser.getAge()==0)){
+        if (!(newUser.getAge() == 0)) {
             return User.newBuilder(dbUser).setAge(newUser.getAge()).build();
         }
-        if(!newUser.getGender().isEmpty()){
+        if (!newUser.getGender().isEmpty()) {
             return User.newBuilder(dbUser).setGender(newUser.getGender()).build();
         }
-        if(!(newUser.getPhone()==0)){
+        if (!(newUser.getPhone() == 0)) {
             return User.newBuilder(dbUser).setPhone(newUser.getPhone()).build();
         }
-        if(!newUser.getEmail().isEmpty()){
+        if (!newUser.getEmail().isEmpty()) {
             return User.newBuilder(dbUser).setEmail(newUser.getEmail()).build();
         }
-        if(!newUser.getAddress().isEmpty()){
+        if (!newUser.getAddress().isEmpty()) {
             return User.newBuilder(dbUser).setAddress(newUser.getAddress()).build();
         }
-        if(!newUser.getCity().isEmpty()){
+        if (!newUser.getCity().isEmpty()) {
             return User.newBuilder(dbUser).setCity(newUser.getCity()).build();
         }
-        if(!newUser.getState().isEmpty()){
+        if (!newUser.getState().isEmpty()) {
             return User.newBuilder(dbUser).setState(newUser.getState()).build();
         }
-        if(!(newUser.getPincode()==0)){
+        if (!(newUser.getPincode() == 0)) {
             return User.newBuilder(dbUser).setPincode(newUser.getPincode()).build();
         }
         return dbUser;

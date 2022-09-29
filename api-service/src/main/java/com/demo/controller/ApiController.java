@@ -19,7 +19,7 @@ public class ApiController {
     private ApiService apiService;
 
     @GetMapping("/user/{id}")
-    public Map<Descriptors.FieldDescriptor, Object> getUser(@PathVariable String id){
+    public Map<Descriptors.FieldDescriptor, Object> getUser(@PathVariable String id) {
         return apiService.getUser(id);
     }
 
