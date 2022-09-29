@@ -1,5 +1,6 @@
 package com.demo.dto.request;
 
+import com.demo.DeleteRequest;
 import com.demo.User;
 
 public class DeleteUsersRequestDto {
@@ -15,5 +16,9 @@ public class DeleteUsersRequestDto {
 
     public User generateUser(){
         return User.newBuilder().setId(this.id).build();
+    }
+
+    public DeleteRequest generateDeleteRequest(){
+        return DeleteRequest.newBuilder().setId(this.getId()).build();
     }
 }
