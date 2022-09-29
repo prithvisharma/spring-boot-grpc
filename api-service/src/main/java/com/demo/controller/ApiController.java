@@ -39,7 +39,7 @@ public class ApiController {
     }
 
     @DeleteMapping("/users/")
-    public String deleteUsers(@RequestBody List<DeleteUsersRequestDto> userList){
+    public List<Map<Descriptors.FieldDescriptor, Object>> deleteUsers(@RequestBody List<DeleteUsersRequestDto> userList) throws InterruptedException {
         return apiService.deleteUsers(userList);
     }
 }
