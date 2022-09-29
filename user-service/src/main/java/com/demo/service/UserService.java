@@ -93,6 +93,26 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
 
     @Override
     public StreamObserver<DeleteRequest> deleteUsers(StreamObserver<DeleteResponse> responseObserver) {
-        return super.deleteUsers(responseObserver);
+        return new StreamObserver<DeleteRequest>() {
+            final List<DeleteResponse> responseList = new ArrayList<>();
+
+            @Override
+            public void onNext(DeleteRequest deleteRequest) {
+                final String id = deleteRequest.getId();
+                final boolean isDeleted = userDatabase.deleteById(id);
+                responseList.add(DeleteResponse.newBuilder().setId(id).setDeleted(isDeleted).build());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                responseObserver.onError(throwable);
+            }
+
+            @Override
+            public void onCompleted() {
+                responseList.forEach(responseObserver::onNext);
+                responseObserver.onCompleted();
+            }
+        };
     }
 }
