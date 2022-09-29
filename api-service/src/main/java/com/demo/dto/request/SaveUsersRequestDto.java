@@ -1,5 +1,7 @@
 package com.demo.dto.request;
 
+import com.demo.User;
+
 public class SaveUsersRequestDto {
     private String name;
     private int age;
@@ -81,5 +83,13 @@ public class SaveUsersRequestDto {
 
     public void setPincode(int pincode) {
         this.pincode = pincode;
+    }
+
+    public User generateUser() {
+        return User.newBuilder()
+                .setName(this.getName()).setAge(this.getAge())
+                .setGender(this.getGender()).setPhone(this.getPhone()).setEmail(this.getEmail())
+                .setAddress(this.getAddress()).setCity(this.getCity()).setState(this.getState())
+                .setPincode(this.getPincode()).build();
     }
 }
