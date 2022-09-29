@@ -1,12 +1,12 @@
 package com.demo.controller;
 
+import com.demo.dto.request.DeleteUsersRequestDto;
+import com.demo.dto.request.SaveUsersRequestDto;
+import com.demo.dto.request.UpdateUsersRequestDto;
 import com.demo.service.ApiService;
 import com.google.protobuf.Descriptors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -26,5 +26,20 @@ public class ApiController {
     @GetMapping("/users/alike/{namelike}")
     public List<Map<Descriptors.FieldDescriptor, Object>> getAlikeUsers(@PathVariable String namelike) throws InterruptedException {
         return apiService.getAlikeUsers(namelike);
+    }
+
+    @PostMapping("/users/")
+    public List<Map<Descriptors.FieldDescriptor, Object>> saveUsers(@RequestBody List<SaveUsersRequestDto> userList) throws InterruptedException {
+        return apiService.saveUsers(userList);
+    }
+
+    @PutMapping("/users/")
+    public String updateUsers(@RequestBody List<UpdateUsersRequestDto> userList){
+        return apiService.updateUsers(userList);
+    }
+
+    @DeleteMapping("/users/")
+    public String deleteUsers(@RequestBody List<DeleteUsersRequestDto> userList){
+        return apiService.deleteUsers(userList);
     }
 }
