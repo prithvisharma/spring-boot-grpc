@@ -34,7 +34,7 @@ public class ApiController {
     }
 
     @PutMapping("/users/")
-    public String updateUsers(@RequestBody List<UpdateUsersRequestDto> userList){
+    public List<Map<Descriptors.FieldDescriptor, Object>> updateUsers(@RequestBody List<UpdateUsersRequestDto> userList) throws InterruptedException {
         return apiService.updateUsers(userList);
     }
 
