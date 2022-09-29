@@ -2,6 +2,9 @@ package com.demo.service;
 
 import com.demo.User;
 import com.demo.UserServiceGrpc;
+import com.demo.dto.request.DeleteUsersRequestDto;
+import com.demo.dto.request.SaveUsersRequestDto;
+import com.demo.dto.request.UpdateUsersRequestDto;
 import com.google.protobuf.Descriptors;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.client.inject.GrpcClient;
@@ -52,5 +55,48 @@ public class ApiService {
 
         boolean await = countDownLatch.await(1, TimeUnit.MINUTES);
         return await ? response : Collections.emptyList();
+    }
+
+
+    public List<Map<Descriptors.FieldDescriptor, Object>> saveUsers(List<SaveUsersRequestDto> userList) throws InterruptedException {
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        final List<Map<Descriptors.FieldDescriptor, Object>> response = new ArrayList<>();
+
+        StreamObserver<User> responseObserver = userGrpcStreamingClient.saveUsers(new StreamObserver<User>() {
+            @Override
+            public void onNext(User user) {
+                response.add(user.getAllFields());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onCompleted() {
+                countDownLatch.countDown();
+            }
+        });
+
+        userList.forEach( (userDto) -> {
+        responseObserver.onNext(User.newBuilder()
+                .setName(userDto.getName()).setAge(userDto.getAge())
+                .setGender(userDto.getGender()).setPhone(userDto.getPhone()).setEmail(userDto.getEmail())
+                .setAddress(userDto.getAddress()).setCity(userDto.getCity()).setState(userDto.getState())
+                .setPincode(userDto.getPincode()).build()
+        );
+        });
+        responseObserver.onCompleted();
+        boolean await = countDownLatch.await(1, TimeUnit.MINUTES);
+        return await ? response : Collections.emptyList();
+    }
+
+    public String updateUsers(List<UpdateUsersRequestDto> userList) {
+        return null;
+    }
+
+    public String deleteUsers(List<DeleteUsersRequestDto> userList) {
+    return null;
     }
 }
